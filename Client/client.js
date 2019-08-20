@@ -11,3 +11,8 @@ var timeApp = new Vue({
     message: "Hello world!"
   }
 });
+
+var mainMap = L.map('mainMap').setView([51.505, -0.09], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(mainMap);
