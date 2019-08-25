@@ -1,27 +1,18 @@
+// jshint esversion: 6
+// jshint browser: true
+// jshint node: true
+"use strict";
 
 
-// test template?
-QUnit.test( "Coin Test in HTML (is fair coin?)", function( assert ) {
+//test swapLatLon
+QUnit.test( "swapLatLon working correctly?", function( assert ) {
 
-  var lim = 1000;     // coin throws
-  var delta = 0.01;   // allowed delta margin for accepting coin in percent
-  var headscount = 0; // number of times the coin returned head
+  var coords1 = ["first", "second"];
+  var coords2 = [1,2];
+  var coords3 = [0,0];
 
-  var c1 = new Coin(1);
-  c1.observe = true;
-
-  var results = [];
-
-  for(var i=0; i<lim; ++i){
-    headscount += c1.isHeads() ? 1 : 0;
-  }
-
-  console.log("headscount: ", headscount);
-  console.log("lower bound: lim/2.0 - delta*lim", lim/2.0 - delta*lim);
-  console.log("upper bound: lim/2.0 + delta*lim", lim/2.0 + delta*lim);
-
-  assert.ok(lim/2.0 - delta*lim < headscount, "not too few heads...");
-  assert.ok(lim/2.0 + delta*lim > headscount, "not too many heads...");
-
+  assert.deepEqual(swapLatLon(coords1), ["second","first"], "swap of string tuple successful");
+  assert.deepEqual(swapLatLon(coords2), [2,1], "swap of integer tuple successful");
+  assert.deepEqual(swapLatLon(coords3), [0,0], "swap of identical tuple successful");
 
 });
