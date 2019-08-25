@@ -54,17 +54,14 @@ function mapSetUp(){
 function createRoute(map, shape, inputColor){
   var id;
   var inputCoords = shape.features[0].geometry.coordinates;
-  var swappedInputCoords = []
 
   //swap the coordinates of each point as for SOME REASON GeoJSON got them in the wrong order
-  inputCoords.forEach(function(element, index, Array){
-      swappedInputCoords.push(swapLatLon(element));
-  });
+  inputCoords = swapLatLon(inputCoords);
 
   if (routes.length < 1) id = 0;
   else id = routes[routes.length - 1]._id + 1;
 
-  var newRoute = L.polyline(swappedInputCoords, {color: inputColor});
+  var newRoute = L.polyline(inputCoords, {color: inputColor});
   newRoute._id = id;
 
   mainMap.addLayer(newRoute);
@@ -72,10 +69,10 @@ function createRoute(map, shape, inputColor){
 }
 
 /**
-* @function removeRouteFromMap
+* @function removeRoute
 * @desc function to remove a given shape object from a given map
 */
-function removeRouteFromMap(map, id){
+function removeRoute(map, id){
   var new_routes = [];
   routes.forEach(function(route) {
     if (route._id == id) map.removeLayer(route);
@@ -85,12 +82,23 @@ function removeRouteFromMap(map, id){
 
 /**
 * @function swapLatLon
-* @param coords coordinate tuple to swap the entries of
+* @param coords coordinate tuple to swap the entries of, or Array of coordinate tuples
 */
 function swapLatLon(coords){
-  var newCoords = [];
+  if(coords.length < 2){
+    Error("invalid coordinate input");
+  }
+  else if(coords.length > 2){
+    var newCoordArray = [];
+    coords.forEach(function(element, index, Array){
+        newCoordArray.push(swapLatLon(element));
+    });
+    return newCoordArray;
+  } else {
+    var newCoords = [];
 
-  newCoords[0] = coords[1];
-  newCoords[1] = coords[0];
-  return newCoords;
+    newCoords[0] = coords[1];
+    newCoords[1] = coords[0];
+    return newCoords;
+  }
 }
