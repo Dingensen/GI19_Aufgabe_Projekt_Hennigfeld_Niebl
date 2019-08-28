@@ -1,0 +1,43 @@
+
+nav{
+    font-family: Consolas;
+}
+
+div.container {
+  font-family: Consolas;
+  padding-top: 80px;
+}
+div[id="RouteSelector"] {
+  float:left;
+  width:150px;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+    border: 2px solid #A9A9A9;
+    border-color: solid black;
+    border-collapse: collapse;
+}
+div[id="mainMap"] {
+  margin: auto;
+  margin-top:10px;
+  margin-bottom:10px;
+  border: 10px;
+  font-family: Consolas;
+  padding-top: 40px;
+  padding-right: 15%;
+  padding-left: 15%;
+  height: 400px;
+}
+.button {
+	text-align: center;
+ 	font-family: Consolas;
+}
+textarea {
+    width: 80%;
+    color:  grey;
+    margin: 6px
+}
+input[type="number"] {
+    width: 48px;
+    color:  grey;
+}
